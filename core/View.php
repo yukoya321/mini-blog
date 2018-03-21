@@ -40,6 +40,6 @@ class View
 
   public function escape($string)
   {
-    return htmlspecialchars($string, ENT_QOUTES, 'UTF-8');
+    return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
   }
 }
