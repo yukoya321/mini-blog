@@ -27,7 +27,7 @@ class DbManager
     $this->connections[$name] = $con;
   }
 
-  public function getConnecton($name = null)
+  public function getConnection($name = null)
   {
     if(is_null($name))
     {
@@ -44,7 +44,7 @@ class DbManager
 
   public function getConnectionForRepository($repository_name)
   {
-    if(isset($this->repository_connection_map[$repositry_name]))
+    if(isset($this->repository_connection_map[$repository_name]))
     {
       $name = $this->repository_connection_map[$repository_name];
       $con = getConnection($name);
@@ -57,8 +57,8 @@ class DbManager
 
   public function get($repository_name)
   {
-    if(!isset($this->repositories[$repositories_name])){
-      $repositories_class = $repositry_name.'Repository';
+    if(!isset($this->repositories[$repository_name])){
+      $repository_class = $repository_name.'Repository';
       $con = $this->getConnectionForRepository($repository_name);
 
       $repository = new $repository_class($con);
