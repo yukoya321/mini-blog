@@ -8,7 +8,7 @@ class StatusController extends Controller
     $statuses = $this->db_manager->get('Status')->fetchAllPersonalArchivesByUserId($user['id']);
 
     return $this->render(array(
-      'status' => $statuses,
+      'statuses' => $statuses,
       'body' => '',
       '_token' => $this->generateCsrfToken('status/post'),
     ));
