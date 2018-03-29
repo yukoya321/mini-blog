@@ -2,24 +2,24 @@
 
 class AccountController extends Controller
 {
-  public function singupAction()
+  public function signupAction()
   {
     return $this->render(array(
       'user_name' => '',
       'password' => '',
-      '_token' => $this->generateCsrfToken('account/singup')
+      '_token' => $this->generateCsrfToken('account/signup')
     ));
   }
 
   public function registerAction()
   {
-    if(!$this->request->ispost())
+    if(!$this->request->isPost())
     {
       $this->forward404();
     }
 
     $token = $this->request->getPost('_token');
-    if(!$this->checkCsrfToken('account/singup', $token))
+    if(!$this->checkCsrfToken('account/signup', $token))
     {
       return $this->redirect('/account/signup');
     }
@@ -34,7 +34,7 @@ class AccountController extends Controller
       $errors[] = 'need userID';
     } else if(!preg_match('/^\w{3,20}$/', $user_name)){
       $errors[] = 'userID is too long!';
-    } else if($this->db_manager->get('User')->isUniqueUserName($user_name))
+    } else if(!$this->db_manager->get('User')->isUniqueUserName($user_name))
     {
       $errors[] = 'duplicate id';
     }
@@ -58,10 +58,11 @@ class AccountController extends Controller
     }
 
     return $this->render(array(
+      'u'=> $this->db_manager->get('User')->isUniqueUserName($user_name),
       'user_name' => $user_name,
       'password' => $password,
       'errors' => $errors,
-      '_token' => $this->generateCsrfToken('account/singup'),
+      '_token' => $this->generateCsrfToken('account/signup'),
     ), 'signup');
 
   }
