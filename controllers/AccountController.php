@@ -66,4 +66,10 @@ class AccountController extends Controller
     ), 'signup');
 
   }
+
+  public function indexAction()
+  {
+    $user = $this->session->get('user');
+    return $this->render(array('user' => $user));
+  }
 }
