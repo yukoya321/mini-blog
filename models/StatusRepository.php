@@ -36,11 +36,11 @@ class StatusRepository extends DbRepository
 
   public function fetchByIdAndUserName($id, $user_name)
   {
-    $sql = 'select a.,u.user_name from status a left join user u on u.id = a.user_id
-            here a.id = :id and u.user_name = :user_name';
+    $sql = 'select a.*,u.user_name from status a left join user u on u.id = a.user_id
+            where a.id = :id and u.user_name = :user_name';
     return $this->fetch($sql, array(
       ':id' => $id,
-      'user_name' => $user_name
+      ':user_name' => $user_name
     ));
   }
 }
